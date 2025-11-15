@@ -1,6 +1,6 @@
 import TelegramBot from "node-telegram-bot-api";
 
-const TOKEN = "8399278388:AAGykqnSENSW30QNMGLJYFUbG-5-JskSSuE";
+const TOKEN = "7714950057:AAEyIWBNW757dNtIB6YT3SKkdmhq2nttYpg";
 
 const bot = new TelegramBot(TOKEN, { polling: true });
 
@@ -68,11 +68,12 @@ Quyidagi menyudan kerakli bo‘limni tanlang 👇
       }
     );
 
-    const latitude = 41.3781989;
-    const longitude = 60.3694056;
+    const latitude = 41.3871008;
+    const longitude = 60.3624996;
 
     bot.sendMessage(chatId, "📍 Bizning o‘quv markaz joylashuvi:");
     bot.sendLocation(chatId, latitude, longitude);
+
   } else {
     bot.sendMessage(
       chatId,
@@ -82,8 +83,159 @@ Quyidagi menyudan kerakli bo‘limni tanlang 👇
 Iltimos, quyidagi tugmani bosing 👇
 /start
     `
-    );
+  );
   }
 });
 
+ bot.on("callback_query", (query) => {
+  console.log( query);
+  const chatId = query.message.chat.id;
+  const data = query.data;
+
+
+
+  if( data == "course_english") {
+    bot.sendMessage(
+      chatId, 
+      `
+       🇬🇧 Ingliz tili kursi haqida:
+
+📆 Davomiyligi: 3 oy  
+⏰ Darslar: Haftasiga 3 marta (1,5 soatdan)  
+👨‍🏫 O‘qituvchi: Tajribali filologlar  
+💰 Narxi: 350 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+
+      `,
+     
+      {
+        reply_markup: {
+          keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish" }],
+            [{ text: "⬅️ Orqaga" }],
+          ],
+          resize_keyboard: true,
+        },
+      }
+
+
+    )
+  }   else if (data == "course_russian") {
+    bot.sendMessage(chatId, `
+      🇷🇺 Rus tili kursi haqida:
+
+📆 Davomiyligi: 3 oy
+⏰ Darslar: Haftasiga 3 marta (1,5 soatdan)
+👨‍🏫 O‘qituvchi: Tajribali filologlar
+💰 Narxi: 450 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+      `,
+    
+    
+      {
+        reply_markup: {
+          keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish" }],
+            [{ text: "⬅️ Orqaga" }],
+          ],
+          resize_keyboard: true,
+        },
+      }
+
+    
+    );
+  }   else if (data == "course_math") {
+    bot.sendMessage(chatId, `
+     🧮 Matematika kursi haqida:
+
+📆 Davomiyligi: 4 oy
+⏰ Darslar: Haftasiga 3 marta (1,5 soatdan)
+👨‍🏫 O‘qituvchi: Tajribali matematik mutaxassislar
+💰 Narxi: 500 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+      `,
+    
+    
+      {
+        reply_markup: {
+          keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish" }],
+            [{ text: "⬅️ Orqaga" }],
+          ],
+          resize_keyboard: true,
+        },
+      }
+
+    
+    );
+  }   else if (data == "course_programming") {
+    bot.sendMessage(chatId, `
+   💻 Dasturlash kursi haqida:
+
+📆 Davomiyligi: 6 oy
+⏰ Darslar: Haftasiga 3 marta (2 soatdan)
+📚 Yo‘nalishlar:
+• Python asoslari
+• Web dasturlash (HTML, CSS, JavaScript)
+• Backend asoslari
+• Algoritmlar va mantiq
+
+👨‍🏫 O‘qituvchi: Amaliy tajribaga ega senior dasturchilar
+💰 Narxi: 650 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+      `,
+    
+    
+      {
+        reply_markup: {
+          keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish" }],
+            [{ text: "⬅️ Orqaga" }],
+          ],
+          resize_keyboard: true,
+        },
+      }
+
+    
+    );
+  }  else if (data == "course_design") {
+    bot.sendMessage(chatId, `
+ 🎨 Grafik dizayn kursi haqida:
+
+📆 Davomiyligi: 4 oy
+⏰ Darslar: Haftasiga 3 marta (2 soatdan)
+📚 O‘quv dasturi:
+• Adobe Photoshop
+• Adobe Illustrator
+• Logotip yaratish
+• Banner va poster dizayni
+• Rang nazariyasi va kompozitsiya
+• SMM uchun kreativ dizaynlar
+
+👨‍🏫 O‘qituvchi: Tajribali grafik dizaynerlar
+💰 Narxi: 550 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+      `,
+    
+    
+      {
+        reply_markup: {
+          keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish" }],
+            [{ text: "⬅️ Orqaga" }],
+          ],
+          resize_keyboard: true,
+        },
+      }
+
+    
+    );
+  } 
+  
+ })
 console.log("Bot ishga tushdi...");

@@ -4,19 +4,11 @@ const TOKEN = "7714950057:AAEyIWBNW757dNtIB6YT3SKkdmhq2nttYpg";
 
 const bot = new TelegramBot(TOKEN, { polling: true });
 
-
-bot.on("message", (msg) => {
-  console.log(msg);
-  const chatId = msg.chat.id;
-  const text = msg.text;
-  const firstName = msg.chat.first_name;
-
-
-
-  if (text == "/start" || text == "Boshlash 🔥") {
-    bot.sendMessage(
-      chatId,
-      `
+// 🔙 ORQAGA funksiyasi
+function mainMenu(chatId, firstName) {
+  bot.sendMessage(
+    chatId,
+    `
     👋 Assalomu alaykum, ${firstName}!
 
 📚 100x o‘quv markazining rasmiy botiga xush kelibsiz!
@@ -27,19 +19,33 @@ Bu bot orqali siz:
 • Jadval va to‘lovlar haqida ma’lumot olasiz  
 
 Quyidagi menyudan kerakli bo‘limni tanlang 👇
-
     `,
-      {
-        reply_markup: {
-          keyboard: [
-            [{ text: "📚 Kurslar" }, { text: "✍️ Ro‘yxatdan o‘tish" }],
-            [{ text: "ℹ️ Markaz haqida" }, { text: "💬 Fikr bildirish" }],
-            [{ text: "❓ Yordam" }],
-          ],
-          resize_keyboard: true,
-        },
-      }
-    );
+    {
+      reply_markup: {
+        keyboard: [
+          [{ text: "📚 Kurslar" }, { text: "✍️ Ro‘yxatdan o‘tish" }],
+          [{ text: "ℹ️ Markaz haqida" }, { text: "💬 Fikr bildirish" }],
+          [{ text: "❓ Yordam" }],
+        ],
+        resize_keyboard: true,
+      },
+    }
+  );
+}
+
+bot.on("message", (msg) => {
+  console.log(msg);
+  const chatId = msg.chat.id;
+  const text = msg.text;
+  const firstName = msg.chat.first_name;
+
+  // 🔙 Orqaga bosilsa asosiy menyu
+  if (text === "⬅️ Orqaga") {
+    return mainMenu(chatId, firstName);
+  }
+
+  if (text == "/start" || text == "Boshlash 🔥") {
+    mainMenu(chatId, firstName);
   } else if (text == "📚 Kurslar") {
     bot.sendMessage(
       chatId,
@@ -83,20 +89,18 @@ Quyidagi menyudan kerakli bo‘limni tanlang 👇
 Iltimos, quyidagi tugmani bosing 👇
 /start
     `
-  );
+    );
   }
 });
 
- bot.on("callback_query", (query) => {
-  console.log( query);
+bot.on("callback_query", (query) => {
+  console.log(query);
   const chatId = query.message.chat.id;
   const data = query.data;
 
-
-
-  if( data == "course_english") {
+  if (data == "course_english") {
     bot.sendMessage(
-      chatId, 
+      chatId,
       `
        🇬🇧 Ingliz tili kursi haqida:
 
@@ -108,7 +112,6 @@ Iltimos, quyidagi tugmani bosing 👇
 ✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
 
       `,
-     
       {
         reply_markup: {
           keyboard: [
@@ -118,11 +121,11 @@ Iltimos, quyidagi tugmani bosing 👇
           resize_keyboard: true,
         },
       }
-
-
-    )
-  }   else if (data == "course_russian") {
-    bot.sendMessage(chatId, `
+    );
+  } else if (data == "course_russian") {
+    bot.sendMessage(
+      chatId,
+      `
       🇷🇺 Rus tili kursi haqida:
 
 📆 Davomiyligi: 3 oy
@@ -132,8 +135,6 @@ Iltimos, quyidagi tugmani bosing 👇
 
 ✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
       `,
-    
-    
       {
         reply_markup: {
           keyboard: [
@@ -143,11 +144,11 @@ Iltimos, quyidagi tugmani bosing 👇
           resize_keyboard: true,
         },
       }
-
-    
     );
-  }   else if (data == "course_math") {
-    bot.sendMessage(chatId, `
+  } else if (data == "course_math") {
+    bot.sendMessage(
+      chatId,
+      `
      🧮 Matematika kursi haqida:
 
 📆 Davomiyligi: 4 oy
@@ -157,8 +158,6 @@ Iltimos, quyidagi tugmani bosing 👇
 
 ✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
       `,
-    
-    
       {
         reply_markup: {
           keyboard: [
@@ -168,11 +167,11 @@ Iltimos, quyidagi tugmani bosing 👇
           resize_keyboard: true,
         },
       }
-
-    
     );
-  }   else if (data == "course_programming") {
-    bot.sendMessage(chatId, `
+  } else if (data == "course_programming") {
+    bot.sendMessage(
+      chatId,
+      `
    💻 Dasturlash kursi haqida:
 
 📆 Davomiyligi: 6 oy
@@ -188,8 +187,6 @@ Iltimos, quyidagi tugmani bosing 👇
 
 ✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
       `,
-    
-    
       {
         reply_markup: {
           keyboard: [
@@ -199,11 +196,11 @@ Iltimos, quyidagi tugmani bosing 👇
           resize_keyboard: true,
         },
       }
-
-    
     );
-  }  else if (data == "course_design") {
-    bot.sendMessage(chatId, `
+  } else if (data == "course_design") {
+    bot.sendMessage(
+      chatId,
+      `
  🎨 Grafik dizayn kursi haqida:
 
 📆 Davomiyligi: 4 oy
@@ -221,8 +218,6 @@ Iltimos, quyidagi tugmani bosing 👇
 
 ✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
       `,
-    
-    
       {
         reply_markup: {
           keyboard: [
@@ -232,10 +227,9 @@ Iltimos, quyidagi tugmani bosing 👇
           resize_keyboard: true,
         },
       }
-
-    
     );
-  } 
-  
- })
+  }
+});
+
 console.log("Bot ishga tushdi...");
+

@@ -4,7 +4,7 @@ config();
 import { onStart } from "./src/onStart.js";
 import { onCourses } from "./src/onCourses.js";
 import { onRegister } from "./src/onRegister.js";
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 
 const TOKEN = process.env.BOT_TOKEN;

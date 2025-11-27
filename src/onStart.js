@@ -1,5 +1,5 @@
 import { bot } from "../index.js";
-
+import User from "./,odels/User.js"     
 
 function onStart(chatId, firstName) {
   console.log(`On Start....!`);
